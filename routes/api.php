@@ -6,6 +6,8 @@ Route::group(['middleware' =>   ['auth:api']],function(){
  Route::put('settings/profile','User\SettingsController@updateProfile');
  Route::put('settings/password','User\SettingsController@updatePassword');
  Route::post('designs','Designs\UploadController@upload');
+ Route::put('designs/{id}','Designs\DesignController@update');
+ Route::delete('designs/{id}','Designs\DesignController@destroy');
 });
 
 //Routes for guests
