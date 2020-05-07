@@ -25,3 +25,7 @@ Route::group(['middleware' =>   ['guest:api']],function(){
 
 //public Routes
  Route::get('me','User\MeController@getMe');
+
+ Route::get("users","User\UserController@index");
+
+ Route::get("designs","Designs\DesignController@index");

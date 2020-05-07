@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Designs;
 
+use App\Repositories\Contracts\IDesign;
 use App\Models\Design;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -11,6 +12,18 @@ use Illuminate\Support\Facades\Storage;
 
 class DesignController extends Controller
 {
+    protected $designs;
+
+    public function __construct(IDesign $designs)
+    {
+       $this->designs = $designs;
+    }
+
+    public function index(){
+        $design = $this->designs->all();
+        return DesignResource::collection($design);
+    }
+
     public function update(Request $req, $id){
         $design = Design::find($id);
         $this->authorize('update',$design);
