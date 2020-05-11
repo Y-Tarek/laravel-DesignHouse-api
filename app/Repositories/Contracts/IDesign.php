@@ -4,5 +4,5 @@
  
  interface IDesign
  {
-   
+   public function applyTags($id, array $data);
  }
