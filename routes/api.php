@@ -2,16 +2,23 @@
 
 //Routes fro authinticated users
 Route::group(['middleware' =>   ['auth:api']],function(){
+//Handle user data
  Route::post('logout','Auth\LoginController@logout');
  Route::put('settings/profile','User\SettingsController@updateProfile');
  Route::put('settings/password','User\SettingsController@updatePassword');
+
+ // Handele designs
  Route::post('designs','Designs\UploadController@upload');
  Route::put('designs/{id}','Designs\DesignController@update');
  Route::delete('designs/{id}','Designs\DesignController@destroy');
  Route::get('designs/{id}','Designs\DesignController@getDesignById');
+
+ //Handele Commments
  Route::post("designs/{design_id}/comments","Designs\CommentController@store");
  Route::put('comments/{id}','Designs\CommentController@update');
  Route::delete('comments/{id}','Designs\CommentController@destroy');
+
+ // Handele likes
  Route::post("design/{id}/like","Designs\DesignController@like");
  Route::post("design/{id}/unlike","Designs\DesignController@unlike");
  Route::get("design/{id}/liked","Designs\DesignController@liked");
