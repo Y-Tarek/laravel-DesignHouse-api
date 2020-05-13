@@ -11,6 +11,7 @@ use App\Repositories\Contracts\IDesign;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\elequint\criteria\IsLive;
 use App\Repositories\elequint\criteria\ForUser;
+use App\Repositories\elequint\criteria\EagerLoad;
 use App\Repositories\elequint\criteria\LatestFirst;
 
 class DesignController extends Controller
@@ -26,7 +27,8 @@ class DesignController extends Controller
         $design = $this->designs->withCriteria([
             new LatestFirst(),
             new IsLive(),
-            new ForUser(1)
+            new ForUser(1),
+            new EagerLoad(['user','comments'])
         ])->all();
         return DesignResource::collection($design);
     }
@@ -66,5 +68,18 @@ class DesignController extends Controller
         }
         $this->designs->delete($id);
         return response()->json("Deleted suuccessfuly",200);
+    }
+
+    public function like($id)
+    {
+        $this->designs->like($id);
+        return response()->json("Liked",200);
+    }
+
+    public function liked($id)
+    {
+      $status = $this->designs->isLikedByUser($id);
+      return response()->json(["liked" => $status]);
+
     }
 }

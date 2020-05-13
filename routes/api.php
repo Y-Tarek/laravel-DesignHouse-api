@@ -9,6 +9,12 @@ Route::group(['middleware' =>   ['auth:api']],function(){
  Route::put('designs/{id}','Designs\DesignController@update');
  Route::delete('designs/{id}','Designs\DesignController@destroy');
  Route::get('designs/{id}','Designs\DesignController@getDesignById');
+ Route::post("designs/{design_id}/comments","Designs\CommentController@store");
+ Route::put('comments/{id}','Designs\CommentController@update');
+ Route::delete('comments/{id}','Designs\CommentController@destroy');
+ Route::post("design/{id}/like","Designs\DesignController@like");
+ Route::post("design/{id}/unlike","Designs\DesignController@unlike");
+ Route::get("design/{id}/liked","Designs\DesignController@liked");
 });
 
 //Routes for guests
