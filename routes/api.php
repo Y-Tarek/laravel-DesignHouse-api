@@ -20,19 +20,32 @@ Route::group(['middleware' =>   ['auth:api']],function(){
 
  // Handele likes
  Route::post("design/{id}/like","Designs\DesignController@like");
- Route::post("design/{id}/unlike","Designs\DesignController@unlike");
  Route::get("design/{id}/liked","Designs\DesignController@liked");
+
+ //Handele Teams
+ Route::post('team','Teams\TeamsController@store');
+ Route::get('teams/{id}','Teams\TeamsController@findById');
+ Route::get('users/teams','Teams\TeamsController@fetchUserTeams');
+ Route::put('teams/{id}','Teams\TeamsController@update');
+ Route::delete('teams/{id}','Teams\TeamsController@destroy');
+ Route::delete('teams/{team_id}/user/{user_id}','Teams\TeamsController@deleteFromTeam');
+
+//Handle Invitations
+ Route::post('invitations/{teamId}','Teams\InvitationsController@invite');
+ Route::post('invitations/{id}/resend','Teams\InvitationsController@resend');
+ Route::post('invitations/{id}/respond','Teams\InvitationsController@respond');
+ Route::delete('invitations/{id}','Teams\InvitationsController@destroy');
 });
 
 //Routes for guests
 Route::group(['middleware' =>   ['guest:api']],function(){
 
-   Route::post('register','Auth\RegisterController@register');
-   Route::post('verification/verify/{user}','Auth\VerificationController@verify')->name('verification.verify');
-   Route::post('verification/resend','Auth\VerificationController@resend');
-   Route::post('login','Auth\LoginController@login');
-   Route::post('password/email','Auth\ForgotPasswordController@sendResetLinkEmail');
-   Route::post('password/reset','Auth\ResetPasswordController@reset');
+Route::post('register','Auth\RegisterController@register');
+Route::post('verification/verify/{user}','Auth\VerificationController@verify')->name('verification.verify');
+Route::post('verification/resend','Auth\VerificationController@resend');
+Route::post('login','Auth\LoginController@login');
+Route::post('password/email','Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::post('password/reset','Auth\ResetPasswordController@reset');
 
 
 });
@@ -43,3 +56,7 @@ Route::group(['middleware' =>   ['guest:api']],function(){
  Route::get("users","User\UserController@index");
 
  Route::get("designs","Designs\DesignController@index");
+
+ Route::post('team/slug/{slug}','Teams\TeamsController@findBySlug');
+
+ 

@@ -46,12 +46,14 @@ class DesignController extends Controller
           "title" => ['required','unique:designs,title,'.$id],
           "description" => ['required','string','min:20','max:140'],
           'tags' => ['required'],
+          'team' => ['required_if:assign_to_team,true']
         ]);
         $upd_design= $this->designs->update($id, [
           'title' => $req->title,
           'description' => $req->description,
           'slug' => Str::slug($req->title),
-          'is_live' => ! $design->upload_successfuly ? false : $req->is_live
+          'is_live' => ! $design->upload_successfuly ? false : $req->is_live,
+          'team_id' => $req->team
         ]);
         $this->designs->applyTags($id,$req->tags);
         return new DesignResource($upd_design);

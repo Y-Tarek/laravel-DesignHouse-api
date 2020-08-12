@@ -11,5 +11,13 @@ use App\Models\User;
    {
        return User::class;//App\Models\User
    }
+    
+   public function findByEmail($email)
+   {
+     return $this->model
+                 ->where('email',$email)
+                 ->first();
+   }
 
+   
  }
