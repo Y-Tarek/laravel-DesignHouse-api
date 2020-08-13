@@ -84,4 +84,10 @@ class DesignController extends Controller
       return response()->json(["liked" => $status]);
 
     }
+
+    public function search(Request $req) 
+    {
+        $designs = $this->designs->search($req);
+        return DesignResource::collection($designs);
+    }
 }

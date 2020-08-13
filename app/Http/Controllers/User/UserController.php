@@ -24,4 +24,10 @@ class UserController extends Controller
         ])->all();
         return UserResource::collection($users);
     }
+
+    public function search(Request $req)
+    {
+        $designers = $this->users->search($req);
+        return UserResource::collection($designers);
+    }
 }

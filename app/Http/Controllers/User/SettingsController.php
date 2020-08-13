@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Grimzy\LaravelMysqlSpatial\Types\Point;
+use Grimzy\LaravelMysqlSpatial\Types\Geometry;
 
 
 class SettingsController extends Controller
@@ -21,8 +22,8 @@ class SettingsController extends Controller
             'about' => ['required','string','min:20'],
             'available_to_hire' => ['required'],
             'formatted_address' => ['required'],
-            'location.latitude' => ['required','numeric','min:-90','max:90'],
-            'location.longtitude' => ['required','numeric','min:-180','max:180']
+            'location.latitude' => ['required'],
+            'location.longtitude' => ['required']
         ]);
         $location = new Point($req->location['latitude'],$req->location['longtitude']);
         $user->update([

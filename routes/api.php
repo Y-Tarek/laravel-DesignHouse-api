@@ -66,4 +66,8 @@ Route::post('password/reset','Auth\ResetPasswordController@reset');
 
  Route::post('team/slug/{slug}','Teams\TeamsController@findBySlug');
 
+ Route::get('search/designs', 'Designs\DesignController@search');
+
+ Route::get('search/designers', 'User\UserController@search');
+
  
