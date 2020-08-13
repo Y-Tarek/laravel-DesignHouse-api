@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Chat;
 use App\Models\Team;
 use App\Models\Design;
 use App\Models\Comment;
+use App\Models\Message;
 use App\Models\Invitation;
 use App\Notifications\VerifyEmail;
 use App\Notifications\ResetPassword;
@@ -99,6 +101,26 @@ class User extends Authenticatable implements JWTSubject,MustVerifyEmail
         return $this->hasMany(Invitation::class, 'recipient_email', 'email');
     }
 
+    public function chats()
+    {
+        return $this->belongsToMany(Chat::class, 'participants');
+    }
+
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function getChatWithUser($user_id)
+    {
+       return  $this->chats()
+             ->whereHas('participants',function($query) use ($user_id){
+                           $query->where('user_id', $user_id);
+                      })
+             ->first();
+                      
+    }
     
 
 
