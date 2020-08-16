@@ -41,6 +41,10 @@ class User extends Authenticatable implements JWTSubject,MustVerifyEmail
             'location',
     ];
 
+    protected $appends = [
+        'photo_url'
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -58,6 +62,11 @@ class User extends Authenticatable implements JWTSubject,MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getPhotoUrlAttribute()
+    {
+        return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'jpg?s=200&d=mm';
+    }
 
 
     public function sendEmailVerificationNotification()

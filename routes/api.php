@@ -70,4 +70,12 @@ Route::post('password/reset','Auth\ResetPasswordController@reset');
 
  Route::get('search/designers', 'User\UserController@search');
 
+ Route::get('designs/slug/{slug}','Designs\DesignController@findBySlug');
+
+ Route::get('team/{id}/designs','Designs\DesignController@getForTeam');
+
+ Route::get('user/{id}/designs','Designs\DesignController@getForUser');
+
+ Route::get('user/{username}','User\UserController@findByUserName');
+
  

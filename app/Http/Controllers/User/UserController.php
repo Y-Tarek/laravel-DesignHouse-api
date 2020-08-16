@@ -30,4 +30,11 @@ class UserController extends Controller
         $designers = $this->users->search($req);
         return UserResource::collection($designers);
     }
+
+    public function findByUserName($username)
+    {
+        $user = $this->users
+                     ->findWhereFirst('username', $username);
+         return new UserResource($user);
+    }
 }

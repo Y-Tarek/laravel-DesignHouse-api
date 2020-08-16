@@ -90,4 +90,30 @@ class DesignController extends Controller
         $designs = $this->designs->search($req);
         return DesignResource::collection($designs);
     }
+
+    public function findBySlug($slug)
+    {
+      $design = $this->designs
+                      -> withCriteria([new IsLive()])
+                      ->findWhereFirst('slug',$slug);
+        
+        return new DesignResource($design);      
+    }
+
+    public function getForTeam($id)
+    {
+        $designs = $this->designs
+                        ->withCriteria([new IsLive()])
+                        ->findWhere('team_id', $id);
+
+         return DesignResource::collection($designs);
+    }
+
+    public function getForUser($id)
+    {
+        $designs = $this->designs
+                        ->withCriteria([new IsLive()])
+                        ->findWhere('user_id', $id);
+            return DesignResource::collection($designs);
+    }
 }
