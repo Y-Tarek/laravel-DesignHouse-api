@@ -8,7 +8,7 @@ use App\Models\Like;
  */
 trait Likable
 {
-
+//When deleting the model that uses this TRait automatically remove the likes in the database
   public static function bootlikable()
     {
        static::deleting(function($model){

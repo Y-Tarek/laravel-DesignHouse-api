@@ -4,7 +4,7 @@ return [
 
     "driver" => "smtp",
     "host" => "smtp.mailtrap.io",
-    "port" => 2525,
+    "port" => 587,
     "from" => array(
         "address" => "from@example.com",
         "name" => "Example"

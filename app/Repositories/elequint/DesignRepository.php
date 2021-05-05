@@ -44,15 +44,15 @@ class DesignRepository extends BaseRepository implements IDesign
    {
       $query = (new $this->model)->newQuery();
       $query->where('is_live', true);
-
+//has_comments is the name of the query params
         if($request->has_comments){
             $query->has('comments');
         }
-
+//has_team is the name of the query params
         if($request->has_team){
             $query->has('team');
         }
-
+//q is query strings
         if($request->q){
             $query->where(function($q) use ($request){
                 $q->where('title', 'like', '%' .$request->q. '%')

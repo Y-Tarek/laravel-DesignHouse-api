@@ -47,8 +47,10 @@ class LoginController extends Controller
         $user = $this->guard()->user();
         if($user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail()){
             return response()->json([
-                "errors" => "you need to verify your email"
-            ]);
+                "errors" => [
+                    "message" => "you need to verify your email"
+                ]
+            ],422);
             throw ValidationException::withMessages([
                 $this->username() => "Authintication failed"
             ]);
