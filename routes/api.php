@@ -12,6 +12,7 @@ Route::group(['middleware' =>   ['auth:api']],function(){
  Route::put('designs/{id}','Designs\DesignController@update');
  Route::delete('designs/{id}','Designs\DesignController@destroy');
  Route::get('designs/{id}','Designs\DesignController@getDesignById');
+ Route::get('designs/{id}/byuser','Designs\DesignController@userOwnsDesign');
 
  //Handele Commments
  Route::post("designs/{design_id}/comments","Designs\CommentController@store");

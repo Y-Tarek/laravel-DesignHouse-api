@@ -71,7 +71,7 @@ class TeamsController extends Controller
      public function fetchUserTeams()
      {
          $teams = $this->teams->fetchUserTeams();
-         return  new TeamResource($teams);
+         return  TeamResource::collection($teams);
      }
 
      public function deleteFromTeam($teamId, $userId)
